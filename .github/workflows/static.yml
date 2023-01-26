@@ -23,34 +23,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Generate index.html
-        run: |
-          (
-          cat << EOF
-          <!DOCTYPE html>
-          <html lang="en">
-          <head>
-            <title>s3gw performance reports</title>
-            <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-          </head>
-          <body>
-          <h1>s3gw performance reports</h1>
-          <table>
-          <tr><th>Date</th><th>Filename</th></tr>
-          EOF
-
-                # generate newline separated list of $timestamp $author_filename
-          git ls-tree -r --name-only HEAD -- reports/ \
-          | while read report; do
-              echo $(git log --pretty=format:%as -n 1 -- $report) $report;
-            done \
-          | sort -k1 \
-          | while read ts filename; do
-              echo "<tr><td>$ts</td><td><a href="$filename">$filename</a></td></tr>
-            done
-          cat << EOF
-          </table>
-          </html>
-          ) > index.html
+        run: bin/generate_index > index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
