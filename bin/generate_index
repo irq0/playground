@@ -8,7 +8,16 @@ cat << EOF
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 </head>
 <body>
-<h1>s3gw performance reports</h1>
+<header>
+<h1>
+  <a href="https://s3gw.io">
+    <img src="https://s3gw.io/images/s3gw-logo.svg"
+         alt="s3gw project logo"
+         width="95"
+         height="33"/>
+    <span>s3gw</span></a>
+    performance reports
+</h1>
 <table>
 <tr><th>Date</th><th>Filename</th></tr>
 EOF
