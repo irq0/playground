@@ -19,7 +19,7 @@ git ls-tree -r --name-only HEAD -- reports/ \
 done \
     | sort -k1 \
     | while read ts filename; do
-    echo "<tr><td>$ts</td><td><a href="/$filename">$(basename "$filename")</a></td></tr>"
+    echo "<tr><td>$ts</td><td><a href="$filename">$(basename "$filename")</a></td></tr>"
 done
 cat << EOF
 </table>
