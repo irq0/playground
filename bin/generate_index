@@ -1,0 +1,27 @@
+#!/bin/bash
+
+cat << EOF
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>s3gw performance reports</title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+</head>
+<body>
+<h1>s3gw performance reports</h1>
+<table>
+<tr><th>Date</th><th>Filename</th></tr>
+EOF
+
+git ls-tree -r --name-only HEAD -- reports/ \
+    | while read report; do
+    echo $(git log --pretty=format:%as -n 1 -- $report) $report;
+done \
+    | sort -k1 \
+    | while read ts filename; do
+    echo "<tr><td>$ts</td><td><a href="/$filename">$(basename "$filename")</a></td></tr>"
+done
+cat << EOF
+</table>
+</html>
+EOF
